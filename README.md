@@ -5,7 +5,7 @@ requires only a deck of cards for the encryption and decryption of messages.
 
 While it's true that Solitaire is easily completed by hand given ample time, using a computer is much quicker
 and easier. Because of that, Solitaire conversion routines are available in many languages, though I've not
-yet run across one in Ruby.
+yet run across one in Ruby.  (originally published [HERE](http://rubyquiz.com/quiz1.html) in the pages of the Ruby Quiz, by James Edward Gray II)
 
 This week's quiz is to write a Ruby script that does the encryption and decryption of messages using the
 Solitaire cipher.
