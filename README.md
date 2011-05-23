@@ -72,9 +72,20 @@ Transforming messages is that simple.
 # Keystreaming
 Finally, let's look at the missing piece of the puzzle, generating the keystream letters.
 
-First, let's talk a little about the deck of cards. Solitaire needs a full deck of 52 cards and the two jokers. The jokers need to be visually distinct and I'll refer to them below as A and B. Some steps involve assigning a value to the cards. In those cases, use the cards face value as a base, Ace = 1, 2 = 2... 10 = 10, Jack = 11, Queen = 12, King = 13. Then modify the base by the bridge ordering of suits, Clubs is simply the base value, Diamonds is base value + 13, Hearts is base value + 26, and Spades is base value + 39. Either joker values at 53. When the cards must represent a letter Clubs and Diamonds values are taken to be the number of the letter (1 to 26), as are Hearts and Spades after subtracting 26 from their value (27 to 52 drops to 1 to 26). Now let's make sense of all that by putting it to use.
+First, let's talk a little about the deck of cards. Solitaire needs a full deck of 52 cards and the
+two jokers. The jokers need to be visually distinct and I'll refer to them below as A and B. Some steps
+involve assigning a value to the cards. In those cases, use the cards face value as a base, Ace = 1, 2 = 2...
+10 = 10, Jack = 11, Queen = 12, King = 13. Then modify the base by the bridge ordering of suits, Clubs
+is simply the base value, Diamonds is base value + 13, Hearts is base value + 26, and Spades is
+base value + 39. Either joker values at 53. When the cards must represent a letter Clubs and Diamonds
+values are taken to be the number of the letter (1 to 26), as are Hearts and Spades after subtracting 26
+from their value (27 to 52 drops to 1 to 26). Now let's make sense of all that by putting it to use.
 
-1. Key the deck. This is the critical step in the actual operation of the cipher and the heart of it's security. There are many methods to go about this, such as shuffling a deck and then arranging the receiving deck in the same order or tracking a bridge column in the paper and using that to order the cards. Because we want to be able to test our answers though, we'll use an unkeyed deck, cards in order of value. That is, from top to bottom, we'll always start with the deck:
+1. Key the deck. This is the critical step in the actual operation of the cipher and the heart of it's
+   security. There are many methods to go about this, such as shuffling a deck and then arranging the
+   receiving deck in the same order or tracking a bridge column in the paper and using that to order the
+   cards. Because we want to be able to test our answers though, we'll use an unkeyed deck, cards in order
+   of value. That is, from top to bottom, we'll always start with the deck:
 
         Ace of Clubs
         ...to...
@@ -91,7 +102,8 @@ First, let's talk a little about the deck of cards. Solitaire needs a full deck 
         "A" Joker
         "B" Joker
 
-2. Move the A joker down one card. If the joker is at the bottom of the deck, move it to just below the first card. (Consider the deck to be circular.) The first time we do this, the deck will go from:
+2. Move the A joker down one card. If the joker is at the bottom of the deck, move it to just below the
+   first card. (Consider the deck to be circular.) The first time we do this, the deck will go from:
 
         1 2 3 ... 52 A B
 
@@ -99,19 +111,26 @@ First, let's talk a little about the deck of cards. Solitaire needs a full deck 
 
         1 2 3 ... 52 B A
 
-3. Move the B joker down two cards. If the joker is the bottom card, move it just below the second card. If the joker is the just above the bottom card, move it below the top card. (Again, consider the deck to be circular.) This changes our example deck to:
+3. Move the B joker down two cards. If the joker is the bottom card, move it just below the second card.
+   If the joker is the just above the bottom card, move it below the top card. (Again, consider the deck to
+   be circular.) This changes our example deck to:
 
         1 B 2 3 4 ... 52 A
 
-4. Perform a triple cut around the two jokers. All cards above the top joker move to below the bottom joker and vice versa. The jokers and the cards between them do not move. This gives us:
+4. Perform a triple cut around the two jokers. All cards above the top joker move to below the bottom joker
+   and vice versa. The jokers and the cards between them do not move. This gives us:
 
         B 2 3 4 ... 52 A 1
 
-5. Perform a count cut using the value of the bottom card. Cut the bottom card's value in cards off the top of the deck and reinsert them just above the bottom card. This changes our deck to:
+5. Perform a count cut using the value of the bottom card. Cut the bottom card's value in cards off the top of
+   the deck and reinsert them just above the bottom card. This changes our deck to:
 
-  2 3 4 ... 52 A B 1  (the 1 tells us to move just the B)
+        2 3 4 ... 52 A B 1  (the 1 tells us to move just the B)
 
-6. Find the output letter. Convert the top card to it's value and count down that many cards from the top of the deck, with the top card itself being card number one. Look at the card immediately after your count and convert it to a letter. This is the next letter in the keystream. If the output card is a joker, no letter is generated this sequence. This step does not alter the deck. For our example, the output letter is:
+6. Find the output letter. Convert the top card to it's value and count down that many cards from the top of
+   the deck, with the top card itself being card number one. Look at the card immediately after your count
+   and convert it to a letter. This is the next letter in the keystream. If the output card is a joker, no
+   letter is generated this sequence. This step does not alter the deck. For our example, the output letter is:
 
         D  (the 2 tells us to count down to the 4, which is a D)
 
