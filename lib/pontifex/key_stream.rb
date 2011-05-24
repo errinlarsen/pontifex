@@ -1,6 +1,7 @@
 module Pontifex
   class Card
   end
+
   class KeyStream
     attr_reader :deck
 
