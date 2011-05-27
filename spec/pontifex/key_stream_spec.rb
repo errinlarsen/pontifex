@@ -3,11 +3,11 @@ require 'spec_helper'
 module Pontifex
   describe KeyStream do
     let(:default_key) do
-      key = "Ac,2c,3c,4c,5c,6c,7c,8c,9c,Tc,Jc,Qc,Kc," +
-        "Ad,2d,3d,4d,5d,6d,7d,8d,9d,Td,Jd,Qd,Kd," +
-        "Ah,2h,3h,4h,5h,6h,7h,8h,9h,Th,Jh,Qh,Kh," +
-        "As,2s,3s,4s,5s,6s,7s,8s,9s,Ts,Js,Qs,Ks," +
-        "ja,jb"
+      "Ac,2c,3c,4c,5c,6c,7c,8c,9c,Tc,Jc,Qc,Kc," +
+      "Ad,2d,3d,4d,5d,6d,7d,8d,9d,Td,Jd,Qd,Kd," +
+      "Ah,2h,3h,4h,5h,6h,7h,8h,9h,Th,Jh,Qh,Kh," +
+      "As,2s,3s,4s,5s,6s,7s,8s,9s,Ts,Js,Qs,Ks," +
+      "ja,jb"
     end
     let(:key_stream) { KeyStream.new(default_key) }
 
@@ -42,6 +42,29 @@ module Pontifex
       it "should only contain each card once" do
         expected_count = key_stream.deck.count
         key_stream.deck.uniq.count.should == expected_count
+      end
+    end
+
+    describe "#sequence!" do
+      let(:expected_deck) do
+        key = "2c,3c,4c,5c,6c,7c,8c,9c,Tc,Jc,Qc,Kc," +
+        "Ad,2d,3d,4d,5d,6d,7d,8d,9d,Td,Jd,Qd,Kd," +
+        "Ah,2h,3h,4h,5h,6h,7h,8h,9h,Th,Jh,Qh,Kh," +
+        "As,2s,3s,4s,5s,6s,7s,8s,9s,Ts,Js,Qs,Ks," +
+        "ja,jb,Ac"
+        key.split(",").map { |str| Card.new(str) }
+      end
+
+      it "should modify the deck" do
+        ks = KeyStream.new
+        ks.sequence!
+        ks.deck.should_not == KeyStream.new.deck 
+      end
+
+      it "should leave the deck modified according to the algorithm" do
+        ks = KeyStream.new
+        ks.sequence!
+        ks.deck.should == expected_deck
       end
     end
   end

@@ -12,12 +12,47 @@ module Pontifex
       @deck = process_param(key)
     end
 
+    def sequence!
+      move_down!("ja", 1)
+      move_down!("jb", 2)
+      triple_cut!
+      count_cut!
+    end
+
+
     private
     def process_param(str)
       raise(KeyStreamArgumentError, "'key' parameter must be a string") unless str.instance_of?(String)
       key_ary = str.split(",")
       raise(KeyStreamArgumentError, "'key' parameter must contain exactly 54 'cards'") unless key_ary.count == 54
       key_ary.map { |param| Card.new(param) }
+    end
+
+    def move_down!(card_str, num)
+      num.times do
+        index = @deck.index { |c| c.str == card_str }
+        unless @deck[index] == @deck.last
+          @deck[index], @deck[index + 1] = @deck[index + 1], @deck[index]
+        else
+          @deck.insert(1, @deck.pop)
+        end
+      end
+    end
+
+    def triple_cut!
+      top_index, bottom_index = @deck.index { |c| c.str == "ja" }, @deck.index { |c| c.str == "jb" } 
+      top_index, bottom_index = bottom_index, top_index if top_index > bottom_index
+
+      top = @deck[0...top_index]
+      middle = @deck[top_index..bottom_index]
+      bottom = @deck[bottom_index...-1]
+      @deck.replace bottom + middle + top
+    end
+
+    def count_cut!
+      count = @deck.last.to_i
+      top = @deck.shift(count)
+      @deck.insert(-2, *top)
     end
   end
 end
