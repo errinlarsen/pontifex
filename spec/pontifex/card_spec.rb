@@ -76,6 +76,13 @@ module Pontifex
           Card.new("jb").to_c.should be_nil
         end
       end
+
+      describe "Equality" do
+        it "should be equal to another card created with the same input as a parameter" do
+          param = "Qh"
+          Card.new(param).should == Card.new(param)
+        end
+      end
     end
   end
 end
