@@ -7,6 +7,8 @@ module Pontifex
                   "Ah,2h,3h,4h,5h,6h,7h,8h,9h,Th,Jh,Qh,Kh," +
                   "As,2s,3s,4s,5s,6s,7s,8s,9s,Ts,Js,Qs,Ks," +
                   "ja,jb"
+    JA = Card.new("ja")
+    JB = Card.new("jb")
 
     def initialize(key=DEFAULT_KEY)
       @deck = process_param(key)
@@ -17,6 +19,20 @@ module Pontifex
       move_down!("jb", 2)
       triple_cut!
       count_cut!
+    end
+
+    def letter
+      count = @deck.first.to_i
+      if result = @deck[count].to_c
+        result
+      else
+        sequence!
+        letter
+      end
+    end
+
+    def to_key
+      @deck.map { |card| card.str }.join(",")
     end
 
 
@@ -40,13 +56,14 @@ module Pontifex
     end
 
     def triple_cut!
-      top_index, bottom_index = @deck.index { |c| c.str == "ja" }, @deck.index { |c| c.str == "jb" } 
-      top_index, bottom_index = bottom_index, top_index if top_index > bottom_index
+      ti, bi = @deck.index(JA), @deck.index(JB)
+      ti, bi = bi, ti if ti > bi
 
-      top = @deck[0...top_index]
-      middle = @deck[top_index..bottom_index]
-      bottom = @deck[bottom_index...-1]
-      @deck.replace bottom + middle + top
+      top = @deck[0...ti]
+      middle = @deck[ti..bi]
+      bottom = @deck[(bi + 1)..-1]
+
+      @deck.replace(bottom + middle + top)
     end
 
     def count_cut!

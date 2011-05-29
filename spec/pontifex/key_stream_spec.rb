@@ -11,6 +11,23 @@ module Pontifex
     end
     let(:key_stream) { KeyStream.new(default_key) }
 
+    it "should never contain more than one 'ja' or 'jb' joker" do
+      ks = key_stream
+      20.times { ks.sequence! }
+      ks.deck.select { |c| c.str =~/j[ab]/ }.count.should == 2
+    end
+
+    it "should correctly generate new letters when continuosly sequencing the deck" do
+      ks = key_stream
+      expected_string = "DWJXHYRFDGTMSHPUURXJ"
+      found_string = ""
+      while found_string.length < 20
+        ks.sequence!
+        next if ks.letter.nil?
+        found_string += ks.letter
+      end
+    end
+
     describe "#new" do
       it "should create a standard ordered deck by default" do
         KeyStream.new.deck.should == default_key.split(",").map { |k| Card.new(k) }
@@ -66,6 +83,22 @@ module Pontifex
         ks.sequence!
         ks.deck.should == expected_deck
       end
+    end
+
+    describe "#letter" do
+      it "should return a string" do
+        key_stream.letter.should be_an_instance_of(String)
+      end
+
+      it "should only return a single character" do
+        key_stream.letter.length.should == 1
+      end
+
+      it "should return a 'D' after a single sequence of the default deck" do
+        key_stream.sequence!
+        key_stream.letter.should == 'D'
+      end
+
     end
   end
 end

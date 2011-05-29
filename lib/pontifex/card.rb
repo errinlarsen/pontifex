@@ -13,7 +13,7 @@ module Pontifex
 
     def to_c
       return nil if str[0] == "j"
-      letters = "abcdefghijklmnopqrstuvwxyz".split('')
+      letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('')
       letters[(@value % 26) - 1]
     end
 

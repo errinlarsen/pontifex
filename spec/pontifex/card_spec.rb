@@ -57,19 +57,19 @@ module Pontifex
 
       describe "Card letter values" do
         it "should create a card with a letter of 'd' if '4c' is input as a parameter" do
-          Card.new("4c").to_c.should == "d"
+          Card.new("4c").to_c.should == "D"
         end
 
         it "should create a card with a letter of 'u' if 'Jd' is input as a parameter" do
-          Card.new("Jd").to_c.should == "x"
+          Card.new("Jd").to_c.should == "X"
         end
 
         it "should create a card with a letter of 'j' if 'Th' is input as a parameter" do
-          Card.new("Th").to_c.should == "j"
+          Card.new("Th").to_c.should == "J"
         end
 
         it "should create a card with a letter of 'x' if 'Js' is input as a parameter" do
-          Card.new("Js").to_c.should == "x"
+          Card.new("Js").to_c.should == "X"
         end
 
         it "should create a card with a letter of NIL if 'Jb' is input as a paramter" do
