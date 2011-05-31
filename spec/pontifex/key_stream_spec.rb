@@ -17,7 +17,7 @@ module Pontifex
       ks.deck.select { |c| c.str =~/j[ab]/ }.count.should == 2
     end
 
-    it "should correctly generate new letters when continuosly sequencing the deck" do
+    it "should correctly generate new letters when continuously sequencing the deck" do
       ks = key_stream
       expected_string = "DWJXHYRFDGTMSHPUURXJ"
       found_string = ""
@@ -31,18 +31,6 @@ module Pontifex
     describe "#new" do
       it "should create a standard ordered deck by default" do
         KeyStream.new.deck.should == default_key.split(",").map { |k| Card.new(k) }
-      end
-
-      describe "Parameter validation" do
-        it "should raise an error with an input parameter that is not a string" do
-          ary = default_key.split(",").map { |str| Card.new(str) }
-          expect { KeyStream.new(ary) }.to raise_error KeyStreamArgumentError, "'key' parameter must be a string"
-        end
-
-        it "should raise an error with less than 54 'cards' in the input parameter string" do
-          bad_key = default_key.split(",")[1..-2].join(",")
-          expect { KeyStream.new(bad_key) }.to raise_error KeyStreamArgumentError, "'key' parameter must contain exactly 54 'cards'"
-        end
       end
     end
 

@@ -3,36 +3,6 @@ require 'spec_helper'
 module Pontifex
   describe Card do
     describe "#new" do
-      describe "input validations" do
-        it "should raise an error with an input parameter that is not a string" do
-          expect { Card.new(26) }.to raise_error Pontifex::CardArgumentError, "'input_str' parameter must be a string"
-        end
-
-        it "should raise an error with an input paramter that is less than 2 characters" do
-          expect { Card.new("5") }.to raise_error Pontifex::CardArgumentError, "'input_str' must be 2 characters long"
-        end
-
-        it "should raise an error with an input paramter that is more than 2 characters" do
-          expect { Card.new("5As") }.to raise_error Pontifex::CardArgumentError, "'input_str' must be 2 characters long"
-        end
-
-        it "should raise an error with an input parameter outside of the letters j,A,T,J,Q or K and the numbers 2-9 as the first character" do
-          expect { Card.new("bs") }.to raise_error Pontifex::CardArgumentError, "first character of 'input_str' must be one of [2-9,j,A,T,J,Q,K]"
-        end
-
-        it "should raise an error with an input parameter outside of the letters c,d,h,s,a,b as the second character"do
-          expect { Card.new("9g") }.to raise_error Pontifex::CardArgumentError, "second character of 'input_str' must be one of [a,b,c,d,h,s]"
-        end
-
-        it "should raise an error with a valid card value character, but with a suit of 'a' or 'b'" do
-          expect { Card.new("9b") }.to raise_error Pontifex::CardArgumentError, "only Jokers may have a suit of 'a' or 'b'"
-        end
-
-        it "should raise an error with an input parameter of a Joker with a suit other than 'a' or 'b'" do
-          expect { Card.new("jd") }.to raise_error Pontifex::CardArgumentError, "Jokers may not have a suit other than 'a' or 'b'"
-        end
-      end
-
       describe "Card integer values" do
         it "should create a card with a value of 2 if '2c' is input as a parameter" do
           Card.new("2c").to_i.should == 2
