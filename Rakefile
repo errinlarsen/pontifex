@@ -14,12 +14,12 @@ require 'rake'
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-  gem.name = "pontifex-gem"
-  gem.homepage = "http://github.com/errinlarsen/pontifex-gem"
+  gem.name = "pontifex"
+  gem.homepage = "http://github.com/errinlarsen/pontifex"
   gem.license = "MIT"
   gem.summary = %Q{TODO: one-line summary of your gem}
   gem.description = %Q{TODO: longer description of your gem}
-  gem.email = "elarsen@insightcards.com"
+  gem.email = "errinlarsen@gmail.com"
   gem.authors = ["Errin Larsen"]
   # dependencies defined in Gemfile
 end
