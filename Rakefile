@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "pontifex"
   gem.homepage = "http://github.com/errinlarsen/pontifex"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %{An implementation of the Solitaire Cipher in Ruby}
+  gem.description = %Q{This gem is a solution to ruby quiz #1: http://www.rubyquiz.com/quiz1.html}
   gem.email = "errinlarsen@gmail.com"
   gem.authors = ["Errin Larsen"]
   # dependencies defined in Gemfile
