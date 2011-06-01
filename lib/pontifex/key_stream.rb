@@ -41,6 +41,9 @@ module Pontifex
 
     private
     def process_param(str)
+      #TODO I need to raise an exception here if any 'Ja' jokers,
+      #     as opposed to 'ja' jokers, (or 'Jb') are included in
+      #     the key -- Or does this exception belong in Card?
       key_ary = str.split(",")
       key_ary.map { |param| Card.new(param) }
     end

@@ -20,7 +20,9 @@ module Pontifex
         @keystream.sequence!
       end
 
-      results.scan(/.{5}/).join(" ")
+      output_str = ""
+      results.scan(/.{5}/).each_slice(5) { |s| output_str << s.join(" ") + "\n" }
+      output_str.chomp
     end
 
     def decrypted
@@ -39,7 +41,9 @@ module Pontifex
         @keystream.sequence!
       end
 
-      results.scan(/.{5}/).join(" ")
+      output_str = ""
+      results.scan(/.{5}/).each_slice(5) { |s| output_str << s.join(" ") + "\n" }
+      output_str.chomp
     end
   end
 end

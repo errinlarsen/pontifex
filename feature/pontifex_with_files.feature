@@ -42,9 +42,9 @@ Feature: Pontifex (Solitaire) cipher
     When I run `pontifex encrypt -d set_deck.key -o encrypted_message.txt message_to_encrypt.txt`
     Then the output should contain:
       """
-      Message encrytped.  You can find the results in the file: encrypted_message.txt"
+      Message encrypted.  You can find the results in the file: encrypted_message.txt
       """
-    And there should be a file named "encrypted_message.txt" with:
+    And the file "encrypted_message.txt" should contain exactly:
       """
       GLNCQ MJAFF FVOMB JIYCB
       """
@@ -65,9 +65,9 @@ Feature: Pontifex (Solitaire) cipher
     When I run `pontifex decrypt -d set_deck.key -o decrypted_message.txt message_to_decrypt.txt`
     Then the output should contain:
       """
-      Message encrytped.  You can find the results in the file: decrypted.txt"
+      Message decrypted.  You can find the results in the file: decrypted_message.txt
       """
-    And there should be a file named "decrypted_message.txt" with:
+    And the file "decrypted_message.txt" should contain exactly:
       """
-      Code in Ruby, live longer!"
+      CODEI NRUBY LIVEL ONGER
       """

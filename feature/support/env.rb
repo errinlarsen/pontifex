@@ -9,8 +9,7 @@ end
 
 $LOAD_PATH.unshift(File.dirname(__FILE__) + '/../../lib')
 require "pontifex"
-
 require 'rspec/expectations'
-
 require "aruba/cucumber"
+
 ENV["PATH"] += ":" + File.dirname(__FILE__) + "/../../bin"
