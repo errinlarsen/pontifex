@@ -55,7 +55,6 @@ Feature: Pontifex (Solitaire) cipher
       ABCDE FGHIJ KLMNO PQRST UVWXY
       ZABCD EFGHI JKLMN OPQRS TUVWX
       YZXXX
-      
       """
 
   Scenario: Encrypting a multi-line message with an alternate key interactively
@@ -75,7 +74,6 @@ Feature: Pontifex (Solitaire) cipher
       CPMJC AEFIK OOXGI VHYTU GYZYA
       VRMKB EFOXV ECFPY KEOBY SXIZE
       WPDFJ
-
       """
 
   Scenario: Decrypting a multi-line message with an alternate key interactively
@@ -96,5 +94,68 @@ Feature: Pontifex (Solitaire) cipher
       ABCDE FGHIJ KLMNO PQRST UVWXY
       ZABCD EFGHI JKLMN OPQRS TUVWX
       YZXXX
+      """
 
+  Scenario: Encrypting a multi-line message with an output file interactively
+    When I run `pontifex encrypt -o encrypted_message.txt` interactively
+    And I type "abcdefghijklmnopqrstuvwxyz"
+    And I type "abcdefghijklmnopqrstuvwxyz"
+    And I type "Done"
+    Then the file "encrypted_message.txt" should contain exactly:
+      """
+      EYMBM EYNMQ EYFVE KLJQD UUTWG
+      CPXUP AXBNV IRGUS GIRPI NBDBM
+      GAYAC
+      """
+
+  Scenario: Decrypting a multi-line message with an output file interactively
+    When I run `pontifex decrypt -o decrypted_message.txt` interactively
+    And I type "EYMBM EYNMQ EYFVE KLJQD UUTWG"
+    And I type "CPXUP AXBNV IRGUS GIRPI NBDBM"
+    And I type "GAYAC"
+    And I type "Done"
+    Then the file "decrypted_message.txt" should contain exactly:
+      """
+      ABCDE FGHIJ KLMNO PQRST UVWXY
+      ZABCD EFGHI JKLMN OPQRS TUVWX
+      YZXXX
+      """
+
+  Scenario: Encrypting a multi-line message with an alternate key and an output file interactively
+    Given a file named "alternate_deck.key" with:
+      """
+      Ad,2d,3d,4d,5d,6d,7d,8d,9d,Td,Jd,Qd,Kd,
+      Ac,2c,3c,4c,5c,6c,7c,8c,9c,Tc,Jc,Qc,Kc,ja,
+      Ah,2h,3h,4h,5h,6h,7h,8h,9h,Th,Jh,Qh,Kh,jb,
+      As,2s,3s,4s,5s,6s,7s,8s,9s,Ts,Js,Qs,Ks
+      """
+    When I run `pontifex encrypt -d alternate_deck.key -o encrypted_message.txt` interactively
+    And I type "abcdefghijklmnopqrstuvwxyz"
+    And I type "abcdefghijklmnopqrstuvwxyz"
+    And I type "Done"
+    Then the file "encrypted_message.txt" should contain exactly:
+      """
+      CPMJC AEFIK OOXGI VHYTU GYZYA
+      VRMKB EFOXV ECFPY KEOBY SXIZE
+      WPDFJ
+      """
+
+  Scenario: Decrypting a multi-line message with an alternate key and an output file interactively
+    Given a file named "alternate_deck.key" with:
+      """
+      Ad,2d,3d,4d,5d,6d,7d,8d,9d,Td,Jd,Qd,Kd,
+      Ac,2c,3c,4c,5c,6c,7c,8c,9c,Tc,Jc,Qc,Kc,ja,
+      Ah,2h,3h,4h,5h,6h,7h,8h,9h,Th,Jh,Qh,Kh,jb,
+      As,2s,3s,4s,5s,6s,7s,8s,9s,Ts,Js,Qs,Ks
+      """
+    When I run `pontifex decrypt -d alternate_deck.key -o decrypted_message.txt` interactively
+    And I type "CPMJC AEFIK OOXGI VHYTU GYZYA"
+    And I type "VRMKB EFOXV ECFPY KEOBY SXIZE"
+    And I type "WPDFJ"
+    And I type "Done"
+    Then the file "decrypted_message.txt" should contain exactly:
+      """
+      ABCDE FGHIJ KLMNO PQRST UVWXY
+      ZABCD EFGHI JKLMN OPQRS TUVWX
+      YZXXX
       """
