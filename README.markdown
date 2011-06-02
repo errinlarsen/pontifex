@@ -1,6 +1,6 @@
 # Pontifex: a Solitaire Cipher implementation
 
-Pontifex provides a CLI interface to encrypt and decrypt messages utilizing [The Solitaire Ciphear](http://www.schneier.com/solitaire.html) as designed by Bruce Schneier and featured in Neal Stephenson's +Cryptonomicon+.
+Pontifex provides a CLI interface to encrypt and decrypt messages utilizing [The Solitaire Ciphear](http://www.schneier.com/solitaire.html) as designed by Bruce Schneier and featured in Neal Stephenson's *Cryptonomicon*.
 
 This implementation was developed as a solution to [Ruby Quiz #1](http://www.rubyquiz.com/quiz1.html)
 
