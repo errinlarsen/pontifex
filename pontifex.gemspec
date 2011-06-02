@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{pontifex}
-  s.version = "0.2.0"
+  s.version = "1.0.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Errin Larsen"]
@@ -16,16 +16,14 @@ Gem::Specification.new do |s|
   s.executables = ["pontifex"]
   s.extra_rdoc_files = [
     "LICENSE.txt",
-    "README.md",
-    "README.rdoc"
+    "README.markdown"
   ]
   s.files = [
     ".rvmrc",
     "Gemfile",
     "Gemfile.lock",
     "LICENSE.txt",
-    "README.md",
-    "README.rdoc",
+    "README.markdown",
     "Rakefile",
     "VERSION",
     "bin/pontifex",
@@ -37,6 +35,7 @@ Gem::Specification.new do |s|
     "lib/pontifex/card.rb",
     "lib/pontifex/cipher.rb",
     "lib/pontifex/key_stream.rb",
+    "pontifex.gemspec",
     "spec/pontifex/card_spec.rb",
     "spec/pontifex/cipher_spec.rb",
     "spec/pontifex/key_stream_spec.rb",
